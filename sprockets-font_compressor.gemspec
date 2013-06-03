@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "sprockets-font_compressor"
-  s.version = "0.0.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
@@ -19,11 +19,13 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/sprockets-font_compressor.rb",
+    "sprockets-font_compressor.gemspec",
     "test/helper.rb",
     "test/test_sprockets-font_compressor.rb"
   ]

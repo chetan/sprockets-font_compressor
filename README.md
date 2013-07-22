@@ -5,6 +5,27 @@ Quick and dirty monkeypatch to enable precompression of Web Font related assets
 Filetypes added to compression list:
   otf, eot, svg, ttf, woff
 
+## Compatibility
+
+###Rails 3.2.x:
+
+```ruby
+gem 'sprockets-font_compressor', '~> 1.0.0'
+```
+
+### Rails 4.x:
+
+```ruby
+gem 'sprockets-font_compressor', '~> 1.1.0', :require => false
+```
+
+and in ``lib/tasks/assets.rake``:
+
+```ruby
+require 'sprockets-font_compressor'
+```
+
+
 ## Contributing to sprockets-font_compressor
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.

@@ -1,22 +1,17 @@
 
-module Sprockets
-  class StaticCompiler
+require 'rake/hooks'
 
-    # override method to enable compression of more filetypes
-    def write_asset(asset)
-      path_for(asset).tap do |path|
-        env.logger.info "writing asset: #{path}"
-        filename = File.join(target, path)
-        FileUtils.mkdir_p File.dirname(filename)
-        asset.write_to(filename)
+after 'assets:precompile' do
+  logger       = Logger.new($stderr)
+  logger.level = Logger::INFO
 
-        # monkeypatched to add more file formats
-        if filename.to_s =~ /\.(css|js|otf|eot|svg|ttf|woff)$/
-          env.logger.info "writing asset: #{path}.gz"
-          asset.write_to("#{filename}.gz")
-        end
-      end
-    end
+  env = Sprockets::Environment.new(Rails.root)
+  env.append_path File.join(Rails.root, "public", Rails.application.config.assets.prefix)
 
+  files = Dir.glob(File.join(Rails.root, "public", Rails.application.config.assets.prefix, "**/**"))
+  files.find_all{ |f| f =~ /\.(otf|eot|svg|ttf|woff)$/ }.each do |f|
+    logger.info "Compressing #{f}"
+    asset = Sprockets::StaticAsset.new(env, f, f)
+    asset.write_to("#{f}.gz")
   end
 end

@@ -2,7 +2,7 @@
 require 'rake/hooks'
 
 after 'assets:precompile' do
-  logger = Module.const_defined?("::Logging") ? ::Logging.logger["Sprockets::FontCompressor"] : Rails.logger
+  logger = Module.const_defined?("Logging".to_sym) ? ::Logging.logger["Sprockets::FontCompressor"] : Rails.logger
 
   env = Sprockets::Environment.new(Rails.root)
   env.append_path File.join(Rails.root, "public", Rails.application.config.assets.prefix)
